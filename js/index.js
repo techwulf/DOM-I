@@ -40,3 +40,53 @@ const siteContent = {
 // Example: Update the img src for the logo
 let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"])
+
+const navbar = document.querySelectorAll('nav a');
+navbar.forEach(
+  (element, index) => 
+    element.textContent = siteContent.nav[`nav-item-${index+1}`]
+);
+const ctaH1 = document.querySelector('section.cta h1');
+ctaH1.textContent = siteContent.cta.h1;
+const ctaButton = document.querySelector('section.cta button');
+ctaButton.textContent = siteContent.cta.button;
+const ctaImage = document.querySelector('#cta-img');
+ctaImage.setAttribute('src', siteContent.cta['img-src']);
+
+const articleKeys = Object.keys(siteContent['main-content']);
+articleKeys.splice(4,1);
+const articles = document.querySelectorAll('.main-content .text-content p');
+const headers = document.querySelectorAll('.main-content .text-content h4');
+const artContent = articleKeys.filter(item => item.includes('content'));
+const headContent = articleKeys.filter(item => item.includes('h4'));
+for(let i=0;i<articles.length;i++){
+  articles[i].textContent = siteContent['main-content'][artContent[i]];
+  headers[i].textContent = siteContent['main-content'][headContent[i]];
+}
+const mcImage = siteContent['main-content']['middle-img-src'];
+document.querySelector('#middle-img').src = mcImage;
+
+const contactTitle = document.querySelector('section.contact h4');
+const contactItems = document.querySelectorAll('section.contact p');
+const itemKeys = Object.keys(siteContent.contact).filter(
+  item => !(item.includes('h4'))
+);
+contactTitle.textContent = siteContent.contact['contact-h4'];
+for (let i=0;i<itemKeys.length;i++){
+  contactItems[i].textContent = siteContent.contact[itemKeys[i]];
+}
+document.querySelector('footer p').textContent = siteContent.footer.copyright;
+
+// Add content
+const navbarBase = document.querySelector('nav');
+const navItemOne = document.createElement('a');
+navItemOne.href = '#';
+navItemOne.textContent = 'AAAAAA';
+const navItemTwo = document.createElement('a');
+navItemTwo.href = '#';
+navItemTwo.textContent = 'AAAAAA';
+navbarBase.appendChild(navItemOne);
+navbarBase.appendChild(navItemTwo);
+document.querySelectorAll('header nav a').forEach(
+  item => item.style.color = 'green'
+);
